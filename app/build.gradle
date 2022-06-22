@@ -104,52 +104,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'            
         }
     }
-
-    sourceSets.debug {
-        manifest.srcFile 'config/debug/AndroidManifest.xml'
-    }   
-
-    sourceSets.release {
-        manifest.srcFile 'config/release/AndroidManifest.xml'
-    }
-
-    flavorDimensions "minApi"
-
-    productFlavors {        
-        bundleAfat_SDK23 {            
-            sourceSets.debug {
-                manifest.srcFile 'config/debug/AndroidManifest_SDK23.xml'
-            }
-            sourceSets.release {
-                manifest.srcFile 'config/release/AndroidManifest_SDK23.xml'
-            }            
-            minSdkVersion 23            
-        }
-        afat {            
-            sourceSets.debug {
-                manifest.srcFile 'config/debug/AndroidManifest_SDK23.xml'
-            }
-            sourceSets.release {
-                manifest.srcFile 'config/release/AndroidManifest_SDK23.xml'
-            }
-        }
-    }
-
+   
     defaultConfig.versionCode = 2702
-
-    applicationVariants.all { variant ->
-        variant.outputs.all { output ->
-            outputFileName = "app.apk"
-         //  output.versionCodeOverride = defaultConfig.versionCode * 10 + variant.productFlavors.get(0).abiVersionCode
-        }
-    }
-
-    variantFilter { variant ->
-        def names = variant.flavors*.name
-        if (variant.buildType.name != "release" && !names.contains("afat")) {
-            setIgnore(true)
-        }
-    }
 
     defaultConfig {
         minSdkVersion 16
